@@ -26,7 +26,7 @@ const Header = () => {
       <div className='relative flex  justify-between items-center mb-2'>
         <Link to='/' className='flex gap-1' >
           <img src='/logo.png' className='w-8' alt='Giphy Logo'></img>
-          <h1 className='text-5xl font-extrabold tracking-tight cursor-pointer'>GIPHY</h1>
+          <h1 className='text-5xl font-extrabold tracking-tight cursor-pointer'>GIPHY<strong className='text-pink-400'>Media</strong></h1>
         </Link>
         <div className='flex font-bold text-md gap-2 items-center justify-center'>
           {
