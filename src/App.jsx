@@ -5,6 +5,7 @@ import Favorites from "./Pages/Favorites"
 import SingileGif from "./Pages/SingileGif"
 import AppLayout from "./Layouts/AppLayout"
 import Home from "./Pages/Home"
+import GifProvider from "./Context/GifContext"
 
 function App() {
 
@@ -38,7 +39,9 @@ function App() {
   ])
 
   return (
-   <RouterProvider router={router}/>
+    <GifProvider >
+         <RouterProvider router={router}/>
+    </GifProvider>
   )
 }
 
