@@ -4,8 +4,9 @@ import Header from '../Components/Header'
 
 const AppLayout = () => {
   return (
-    <div className='bg-gray-900 text-white min-h-screen '>
-      <div className='p-1'><Header /></div>
+    <div className='bg-gray-900 text-white min-h-screen p-4 '>
+      <Header />
+      
 
       <main>
         <Outlet />
