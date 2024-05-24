@@ -34,7 +34,7 @@ useEffect(()=>{
             <Gif />
           })
         }
-      </div>
+      </div> 
     </div>
   )
 }
