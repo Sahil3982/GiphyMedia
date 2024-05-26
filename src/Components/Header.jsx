@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { CiMenuKebab } from "react-icons/ci";
 import { HiMiniBars3BottomRight } from 'react-icons/hi2';
 import { GifState } from '../Context/GifContext';
+import GifSearch from './GifSearch';
 
 
 const Header = () => {
@@ -71,6 +72,8 @@ const Header = () => {
 
         }
       </div>
+
+      <GifSearch />
 
     </nav>
   )
