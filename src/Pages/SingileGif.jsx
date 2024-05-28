@@ -4,6 +4,7 @@ import Gif from '../Components/Gif';
 import { GifState } from '../Context/GifContext';
 import FollowOn from '../Components/FollowOn';
 import { HiMiniChevronDown, HiMiniChevronUp } from 'react-icons/hi2';
+import { HiOutlineExternalLink } from 'react-icons/hi';
 const contentType = ["gifs", 'stickers', "texts"]
 const SingileGif = () => {
   const { type, slug } = useParams();
@@ -25,6 +26,7 @@ const SingileGif = () => {
     }
     fetchGf();
   }, [])
+  console.log(gif.source);
   return (
     <div className='grid grid-cols-4 my-10 gap-4'>
       <div className='hidden sm:block'>
@@ -72,6 +74,19 @@ const SingileGif = () => {
         }
         <FollowOn />
         <hr className='mt-5'></hr>
+        {
+          gif?.source && (
+            <div>
+              <span className='faded-text'>Source</span>
+              <div className='flex items-center text-sm font-bold gap-1'>
+                <HiOutlineExternalLink size={25} />
+                <a herf={gif.source} target="_blank" className='truncate'>
+                  {gif.source}
+                </a>
+              </div>
+            </div>
+          )
+        }
       </div>
       <div className='col-span-4 sm:col-span-3'>
         <div className='flex gap-6'>
