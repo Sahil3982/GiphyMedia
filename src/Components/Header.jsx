@@ -27,12 +27,14 @@ const Header = () => {
       <div className='relative flex  justify-between items-center mb-2'>
         <Link to='/' className='flex gap-1' >
           <img src='/logo.png' className='w-8' alt='Giphy Logo'></img>
-          <h1 className='text-5xl font-extrabold tracking-tight cursor-pointer'>GIPHY<strong className='text-pink-400'>Media</strong></h1>
+          <h1 className='text-5xl font-extrabold tracking-tight cursor-pointer'>GIPHY</h1><strong className='text-pink-400 pt-6'>Media</strong>
         </Link>
         <div className='flex font-bold text-md gap-2 items-center justify-center'>
           {
             categories?.slice(0, 5)?.map((category) => (
-              <Link className='px-4 py-1 hover:gradient border-b-4 hidden lg:block rounded'>
+              <Link className='px-4 py-1 hover:gradient border-b-4 hidden lg:block rounded'
+              key={category.name}
+              >
                 {category.name}
               </Link>
             ))
@@ -61,7 +63,7 @@ const Header = () => {
             {
               categories?.map((category) => {
                 return <Link className='font-semibold p-2'
-                  key={categories.name}
+                  key={category.name}
                   to={`/${category.name_encoded}`}>
                   {category.name}
                 </Link>

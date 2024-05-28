@@ -6,8 +6,8 @@ const GifSearch = () => {
     const [query, setQuery] = useState();
     const navigate = useNavigate();
 
-    const serachGifs = async () => {
-        if (query.trim() === "") {
+    const serachGifs =  () => {
+         if (query.trim() === "") {
             return;
         }
         navigate(`/search/${query}`)
