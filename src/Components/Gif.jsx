@@ -4,7 +4,7 @@ import FilterGif from './FilterGif'
 
 const Gif = ({ gif, hover = true }) => {
   return (
-    <Link to={`${gif.type}/${gif.slug}`}>
+    <Link to={`/${gif.type}/${gif.slug}`}>
       <div className='w-full mb-2 relative cursor-pointer group'>
         <img
           src={gif?.images?.fixed_width.webp}
