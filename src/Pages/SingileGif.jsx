@@ -3,14 +3,17 @@ import { useParams } from 'react-router-dom'
 import Gif from '../Components/Gif';
 import { GifState } from '../Context/GifContext';
 import FollowOn from '../Components/FollowOn';
-import { HiMiniChevronDown, HiMiniChevronUp } from 'react-icons/hi2';
+import { HiMiniChevronDown, HiMiniChevronUp, HiMiniHeart } from 'react-icons/hi2';
 import { HiOutlineExternalLink } from 'react-icons/hi';
+import { FaPaperPlane } from 'react-icons/fa';
+import { IoCodeSharp } from 'react-icons/io5';
 const contentType = ["gifs", 'stickers', "texts"]
 const SingileGif = () => {
   const { type, slug } = useParams();
   const [gif, setGif] = useState({})
-  const { gf } = GifState()
+  const { gf, favorites } = GifState()
   const [relatedGifs, setRelatedGifs] = useState([])
+  const [readMore, setReadMore] = useState('')
   const fetchGf = async () => {
     const gifId = slug.split("-");
     const { data } = await gf.gif(gifId[gifId.length - 1]);
@@ -26,7 +29,7 @@ const SingileGif = () => {
     }
     fetchGf();
   }, [])
-  console.log(gif.source);
+
   return (
     <div className='grid grid-cols-4 my-10 gap-4'>
       <div className='hidden sm:block'>
@@ -45,7 +48,7 @@ const SingileGif = () => {
                 </div>
               </div>
               {
-                gif.user?.discription && (
+                gif?.user?.description && (
                   <p className='py-4 whitespace-pre-line text-sm text-gray-400' >
                     {
                       readMore ? gif?.user?.description : gif?.user?.description.slice(0, 100) + "..."
@@ -54,7 +57,7 @@ const SingileGif = () => {
                       onClick={() => setReadMore(!readMore)} >
 
                       {
-                        readMore ? (<>
+                        !readMore ? (<>
                           read less <HiMiniChevronUp size={20} />
                         </>)
                           :
@@ -80,7 +83,7 @@ const SingileGif = () => {
               <span className='faded-text'>Source</span>
               <div className='flex items-center text-sm font-bold gap-1'>
                 <HiOutlineExternalLink size={25} />
-                <a herf={gif.source} target="_blank" className='truncate'>
+                <a href={gif.source} target="_blank" className='truncate'>
                   {gif.source}
                 </a>
               </div>
@@ -93,8 +96,68 @@ const SingileGif = () => {
           <div className='w-full sm:w-3/4'>
             <div className=''>{gif.title}</div>
             <Gif gif={gif} hover={false} />
+
+            {/* {Mobile UI} */}
+            <div className='flex sm:hidden gap-1'>
+              <img
+                src={gif?.user?.avatar_url}
+                alt={gif?.user?.diplay_name}
+                className='h-14'
+              />
+              <div className='px-2'>
+                <div className='font-bold'>{gif?.user?.display_name}</div>
+                <div className='faded-text'>@{gif?.user?.username}</div>
+              </div>
+              <button className='ml-auto'
+              //  onClick={shareGif}
+              >
+                <FaPaperPlane size={25} />
+              </button>
+            </div>
+
           </div>
-          Favorites / Share / Embed
+          <div className='hidden sm:flex flex-col gap-5 mt-6'>
+            <button
+              onClick={() => addToFavorities(gif.id)}
+              className='flex gap-5 items-center font-bold text-lg'>
+              <HiMiniHeart
+                size={30}
+                className={
+                  `${favorites.includes(gif.id) ? "text-red-500" : ""}`
+                } />
+              Favorites
+            </button>
+            <button
+              onClick={() => addToFavorities(gif.id)}
+              className='flex gap-5 items-center font-bold text-lg'>
+              <FaPaperPlane
+                size={30}
+                className={
+                  `${favorites.includes(gif.id) ? "text-red-500" : ""}`
+                } />
+              Share
+            </button>
+            <button
+              onClick={() => addToFavorities(gif.id)}
+              className='flex gap-5 items-center font-bold text-lg'>
+              <IoCodeSharp
+                size={30}
+                className={
+                  `${favorites.includes(gif.id) ? "text-red-500" : ""}`
+                } />
+              Emaded
+            </button>
+          </div>
+        </div>
+        <span className='font-extrabold'>
+          Related GIFs
+        </span>
+        <div className='columns-2 md:columns-3 gap-2'>
+          {
+            relatedGifs.slice(1).map((gif) => (
+              <Gif gif={gif} key={gif.id} />
+            ))
+          }
         </div>
       </div>
     </div>
