@@ -8,7 +8,6 @@ const GifProvider = ({ children }) => {
     const [favorites, setFavorites] = useState([]);
 
     const gf = new GiphyFetch("1dK7qYFFRZFYQmtCEhYN0ljBCYy0lPgH")
-    console.log(gf);
     return <GifContext.Provider value={{ gf, gifs, setGifs, filter, setFilter, favorites }}>{children}</GifContext.Provider>;
 
 
